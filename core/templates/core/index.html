@@ -1,0 +1,181 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Объявления — Школа №135{% endblock %}
+
+{% block body_attrs %}class="index-page"{% endblock %}
+
+{% block extra_css %}
+	<link rel="stylesheet" href="{% static 'css/index.css' %}">
+{% endblock %}
+{% block extra_js %}
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+{% endblock %}
+
+{% block content %}
+<section class="red announcements">
+	<h1>Объявления</h1>
+	<div class="announcements-stack">
+		<a href="#" class="banner">
+			<img src="{% static 'images/banner.jpg' %}" alt="Баннер">
+		</a>
+		<div class="banner_desc">
+			<p>Добро пожаловать на официальный сайт школы N135.</p>
+		</div>
+		<a href="#" class="year">
+			<img src="{% static 'images/2026_year.jpg' %}" alt="">
+		</a>
+		<div class="year_desc">
+			<p>Президент России объявил 2026 год: «Годом Единства Народов России».</p>
+		</div>
+	</div>
+</section>
+
+<section class="orange MAX compact">
+	<h1>Группы в соцсетях</h1>
+	<div class="social-rows">
+		<a href="https://max.ru/id7802145405_gos" class="social_banner">
+			<img src="{% static 'images/MAX.svg' %}" alt="MAX">
+		</a>
+		<div class="social_desc">
+			<p>Официальная группа в ВК «Почувствуй135» в национальном мессенджере
+				<a href="https://max.ru/id7802145405_gos">MAX</a>
+			</p>
+		</div>
+		<a href="https://vk.ru/schola135" class="social_banner">
+			<img src="{% static 'images/VK.svg' %}" alt="VK">
+		</a>
+		<div class="social_desc">
+			<p>Официальная группа в ВК «Почувствуй135» в мессенджере
+				<a href="https://vk.ru/schola135">VK</a>
+			</p>
+		</div>
+	</div>
+</section>
+
+<section class="yellow">
+	<h1>Госуслуги</h1>
+	<div class="gosuslugi_banner">
+		<div class="bf-18__content">
+			<div class="bf-18__text">
+				Есть предложения по организации учебного процесса или знаете, как сделать школу лучше?
+			</div>
+			<div class="bf-18__bottom-wrap">
+				<div class="bf-18__btn-wrap">
+					<button class="pos-banner-btn_2" type="button">
+						Написать о проблеме
+					</button>
+				</div>
+			</div>
+		</div>
+		<div class="bf-18__decor" aria-hidden="true"></div>
+	</div>
+</section>
+
+<section class="green first-graders">
+	<h1>Родителям первоклассников</h1>
+	<div class="section-row">
+		<img src="{% static 'images/certificate.jpg' %}" alt="">
+		<div>
+			<p>Уважаемые родители будущих первоклассников 2026! С 01 февраля 2026 года в нашей школе начинается запись на занятия по программе «Школьная страна».
+				На занятиях дети познакомятся с нашей школой, правилами и традициями нашей образовательной организации, а также в игровой форме изучат азы основных предметов.
+				Более подробная информация о порядке записи на занятия и о расписании размещена на странице ОДОД.</p>
+		</div>
+		<img src="{% static 'images/chat_bot.jpg' %}" alt="">
+		<div>
+			<p>В целях повышения качества организации питания обучающихся Управление социального питания организует повторное проведение опроса среди родителей (законных представителей) несовершеннолетних обучающихся общеобразовательных организаций.
+				Анкетирование осуществляется дистанционно — в специализированном чат-боте в национальном мессенджере MAX с использованием идентификационного номера, привязанного к единой карте школьника.</p>
+		</div>
+	</div>
+</section>
+
+<section class="blue">
+    <h1>Электронный дневник</h1>
+
+    <div class="section-row">
+        <img src="{% static 'images/ednevnik_petobr.jpg' %}" alt="">
+        <div class="digital_desc">
+            <p>«Электронный дневник»: памятка для петербургских родителей.</p>
+            <p>С 1 августа 2025 года вход в сервис «Электронный дневник» возможен только с использованием ЕСИА («Госуслуги»).</p>
+            <p>Для родителей (законных представителей) обучающихся школ Санкт-Петербурга, а также для самих обучающихся информация об образовательном процессе будет доступна:</p>
+            <ul>
+                <li>
+                    в сервисе «Электронный дневник» на портале «Петербургское образование» —
+                    <a href="https://dnevnik2.petersburgedu.ru/login" target="_blank" rel="noopener">dnevnik2.petersburgedu.ru</a>
+                </li>
+                <li>
+                    в мобильном приложении «Электронный дневник. Петербургское образование»:
+                    <ul>
+                        <li>
+                            <strong>Android</strong> — Ru Store
+                            (<a href="https://clck.ru/3NwKzB" target="_blank" rel="noopener">скачать</a>).
+                            В Google Play приложение не поддерживается.
+                        </li>
+                        <li>
+                            <strong>iOS</strong> — App Store
+                            (<a href="https://clck.ru/3NwL3D" target="_blank" rel="noopener">скачать</a>).
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="section-row">
+        <img id="rustore-qr" src="{% static 'images/qr-code_rustore.svg' %}" alt="">
+        <div>
+            <p>QR код Rustore</p>
+        </div>
+    </div>
+</section>
+
+<section class="indigo">
+	<h1>Сферум</h1>
+    <div class="section-row">
+        <img src="{% static 'images/spherum.png'%}" alt="">
+        <div class="spherum_desc">
+            <p>Справки для школы теперь можно отправлять в Сферуме.
+                Больше не нужно лично относить справку или бояться, что ребёнок потеряет её по пути в школу.
+                Уведомление об отсутствии можно отправить прямо в Сферуме — с помощью сервиса «Справка в школу». Достаточно указать ФИО ребёнка, сроки и причины отсутствия и выбрать нужного педагога (или нескольких).
+                Педагог получит уведомление, которое придёт в отдельный чат и не затеряется в общей переписке.
+                Ищите «Справку в школу» в блоке «Сервисы» в пространстве Сферум в MAX 
+            </p>
+        </div>
+    </div>
+</section>
+<section class="violet">
+	<h1>Граффити</h1>
+	<div class="section-row">
+		<img src="{% static 'images/graffiti.jpg'%}" alt="">
+		<div class="graffiti_desc">
+			<p>Граффити и незаконное нанесение надписей
+				Писать на стенах нехорошо, — это знает каждый ребенок. 
+				Нанесение на стены домов различного рода надписей, рисунков относится к проявлениям хулиганства и вандализма, 
+				любая надпись на стене является нелегальной, если, конечно, не было получено разрешение от собственника. Художники граффити и граждане, «занимающиеся написанием на стенах», 
+				наносят своим творчеством финансовый ущерб, как собственникам зданий, так и местному бюджету, ведь очищение домов от несанкционированных надписей и рисунков обходится городу в круглую сумму, 
+				которую можно было бы потратить на полезные нужды.
+			</p>
+		</div>
+	</div>
+</section>
+<section class="red">
+	<h1>Самокаты</h1>
+	<div class="section-row">
+		<img src="{% static 'images/skate.jpg'%}" alt="">
+		<div class="skate_desc">
+			<p>
+				Весна приходит в наш город, а с ней на тротуарах и дорогах появляются СИМ (средства индивидуальной мобильности):
+				- электросамокаты;
+				- гироскутеры;
+				- моноколеса;
+				- сигвеи;
+				- электроскейтборды;
+				- электровелосипеды.
+				Не попадают в число СИМ транспортные средства без двигателя.
+				По новым правилам, с 1 марта все средства индивидуальной мобильности стали полноценными участниками дорожного движения со всеми вытекающими последствиями: ограничениями и ответственностью за нарушения правил.
+			</p>
+		</div>
+	</div>
+</section>
+{% endblock %}

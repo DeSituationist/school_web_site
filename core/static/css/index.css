@@ -1,0 +1,392 @@
+/* =========================================================
+   Base page layout
+   ========================================================= */
+body.index-page {
+    --header-height: 80px;
+    --page-height: 100vh;
+    /* height, overflow, display:flex all removed — body scrolls normally */
+}
+
+@supports (height: 100dvh) {
+    body.index-page { --page-height: 100dvh; }
+}
+
+body.index-page *,
+body.index-page *::before,
+body.index-page *::after {
+    box-sizing: border-box;
+}
+
+body.index-page header {
+    position: fixed;
+    top: 0; right: 0; left: 0;
+    height: var(--header-height);
+    z-index: 100;
+}
+
+body.index-page main {
+    /* nothing special — let it grow naturally, page scrolls */
+    background-color: var(--bg-color);
+}
+
+body.index-page section {
+    height: var(--page-height);
+    margin: 0 15rem;                 /* <-- gutter, shows main's bg-color */
+    padding: var(--header-height) 2rem 2rem;  /* <-- no more horizontal 15rem */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 1rem;
+    align-items: center;
+    color: var(--text-color);
+    background: var(--primary-bg-color);
+    border-left: 0.1rem solid var(--border-color);
+    border-right: 0.1rem solid var(--border-color);
+}
+
+body.index-page h1 {
+	font-size: 4em;
+	color: var(--text-color);
+}
+
+/* =========================================================
+   Unified horizontal row (used by all content sections)
+   ========================================================= */
+.section-row {
+	display: flex;
+	gap: 1rem;
+	width: 100%;
+	align-self: stretch;   /* section is flex-column with align-items:center */
+	flex: 1;
+	min-height: 0;
+}
+
+/* Image cells (direct <img> or <a> wrapping an <img>) */
+.section-row > img,
+.section-row > a {
+	flex: 1.5 1 0;
+	min-width: 0;
+	min-height: 0;
+	display: block;
+	overflow: hidden;
+	border-radius: var(--border-radius);
+	background: rgba(0, 0, 0, 0.2);
+	box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+	transition:
+		box-shadow var(--transition),
+		transform var(--transition);
+}
+
+.section-row > img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+.section-row > a img {
+	display: block;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	transition: transform var(--transition);
+}
+
+.section-row > a:hover {
+	box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+	transform: translateY(-2px);
+}
+
+.section-row > a:hover img {
+	transform: scale(1.05);
+}
+
+/* Text cells (every direct <div>, except containers we override below) */
+.section-row > div:not(.gosuslugi_banner) {
+	flex: 1 1 0;
+	min-width: 0;
+	min-height: 0;
+	display: flex;
+	align-items: center;
+	overflow-y: auto;
+	padding: 1.5rem;
+	background: rgba(0, 0, 0, 0.2);
+	border-radius: var(--border-radius);
+}
+
+.section-row > div:not(.gosuslugi_banner) p {
+	font-size: 1.75rem;
+	line-height: 1.5;
+	margin: 0;
+}
+
+/* =========================================================
+   MAX-specific tweaks
+   ========================================================= */
+.MAX_banner img {
+	object-fit: contain;   /* don't crop the logo */
+}
+
+.MAX_desc a {
+	color: var(--text-active);
+	font-weight: 700;
+}
+
+/* =========================================================
+   Gosuslugi: banner stacked in column 1, text block in column 2
+   ========================================================= */
+.gosuslugi_banner {
+	width: 100%;
+	align-self: stretch;
+	flex: 1;
+	min-height: 0;
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+}
+
+.bf-18__content {
+	flex: 0 0 auto;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	padding: 2rem;
+	background: #50b3ff;
+	color: #0b1f33;
+	border-radius: var(--border-radius);
+}
+
+.bf-18__text {
+	margin: 0 0 2rem 0;
+	font-size: 2rem;
+	font-weight: 700;
+	line-height: 1.4;
+}
+
+.bf-18__bottom-wrap {
+	display: flex;
+	align-items: center;
+}
+
+.bf-18__btn-wrap {
+	max-width: 24rem;
+}
+
+.pos-banner-btn_2 {
+	width: 100%;
+	min-height: 5.2rem;
+	background: #fff;
+	color: #0b1f33;
+	font-size: 1.6rem;
+	font-weight: 400;
+	padding: 0 1.5rem;
+	border: none;
+	border-radius: 0.4rem;
+	cursor: pointer;
+}
+
+.pos-banner-btn_2:hover {
+	background: #f0f0f0;
+}
+
+.bf-18__decor {
+	flex: 1 1 0;
+	min-height: 15rem;
+	border-radius: var(--border-radius);
+	background:
+		#f8efec
+		url("https://pos.gosuslugi.ru/bin/banner-fluid/18/banner-fluid-bg-18-2.svg")
+		center / cover no-repeat;
+}
+
+.announcements-stack {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+	width: 100%;
+	align-self: stretch;
+	flex: 1;
+	min-height: 0;
+}
+
+/* Images: bigger share of the vertical space */
+.announcements-stack > a {
+	flex: 10 1 0;
+	min-height: 0;
+	display: block;
+	overflow: hidden;
+	border-radius: var(--border-radius);
+	background: rgba(0, 0, 0, 0.2);
+	box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+	transition:
+		box-shadow var(--transition),
+		transform var(--transition);
+}
+
+.announcements-stack > a img {
+	display: block;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	transition: transform var(--transition);
+}
+
+.announcements-stack > a:hover {
+	box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+	transform: translateY(-2px);
+}
+
+.announcements-stack > a:hover img {
+	transform: scale(1.05);
+}
+
+/* Text rows: smaller share, scroll if overflow */
+.announcements-stack > div {
+	flex: 1 1 0;
+	min-height: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	overflow-y: auto;
+	padding: 1rem 1.5rem;
+	background: rgba(0, 0, 0, 0.2);
+	border-radius: var(--border-radius);
+}
+
+.announcements-stack > div p {
+	font-size: 1.75rem;
+	line-height: 1.4;
+	margin: 0;
+}
+
+.first-graders .section-row img{
+    flex: 2.5 1 0;
+}
+
+.social-rows {
+	display: flex;
+	flex-direction: row;
+	gap: 1rem;
+	width: 100%;
+	align-self: stretch;
+	flex: 1;
+	min-height: 0;
+}
+
+.social_banner {
+	flex: 1 1 0;
+	min-width: 0;
+	min-height: 0;
+	display: block;
+	border-radius: var(--border-radius);
+	transition: transform var(--transition);
+}
+
+.social_banner img {
+	display: block;
+	width: 100%;
+	height: 100%;
+	object-fit: contain;
+	transition: transform var(--transition);
+}
+
+.social_banner:hover {
+	transform: translateY(-2px);
+}
+
+.social_banner:hover img {
+	transform: scale(1.05);
+}
+
+.social_desc {
+	flex: 1 1 0;
+	min-width: 0;
+	min-height: 0;
+	display: flex;
+	align-items: center;
+	overflow-y: auto;
+	padding: 1.5rem;
+	border-radius: var(--border-radius);
+}
+
+.social_desc p {
+	font-size: 1.75rem;
+	line-height: 1.5;
+	margin: 0;
+}
+
+.social_desc a {
+	color: var(--text-active);
+	font-weight: 700;
+}
+
+.section-row #rustore-qr {
+    object-fit: contain;
+}
+
+/* Text column — inherits bg, padding, radius from .section-row > div */
+/* Text column — same padding/background/radius as every other .section-row > div */
+.blue .section-row .digital_desc {
+    flex: 2 1 0;
+    min-width: 0;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: safe center;   /* centers when short, scrolls from top when tall */
+    align-items: stretch;           /* left-align text inside, don't center each <p> */
+    overflow-y: auto;
+    padding: 1.5rem 2rem;
+    font-size: 1.5rem;
+    line-height: 1.45;
+}
+
+/* Paragraphs */
+.digital_desc p {
+    margin: 0 0 0.75rem;
+}
+
+.digital_desc p:last-of-type {
+    margin-bottom: 0;
+}
+
+/* Lists — normal bullets, tighter indent */
+.digital_desc ul {
+    list-style: disc;
+    margin: 0.75rem 0 0;
+    padding-left: 1.5rem;
+}
+
+.digital_desc li {
+    margin-bottom: 0.4rem;
+    padding-left: 0.25rem;
+}
+
+.digital_desc li:last-child {
+    margin-bottom: 0;
+}
+
+.digital_desc li::marker {
+    color: #007aff;                 /* accent bullet, matches links */
+}
+
+/* Links */
+.digital_desc a {
+    color: var(--text-active);
+    font-weight: 700;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.35);
+    transition: border-color 0.15s ease;
+}
+
+.digital_desc a:hover {
+    border-bottom-color: currentColor;
+}
+
+body.index-page section.compact {
+    height: auto;              /* shrink to content */
+    padding-bottom: 3rem;      /* optional, replaces the 2rem bottom if you want */
+}
+
+.indigo .section-row .spherum_desc {
+    flex: 2 1 0;
+}
