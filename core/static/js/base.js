@@ -1,5 +1,3 @@
-gsap.registerPlugin(ScrollTrigger);
-
 const dropDownItems = document.querySelectorAll(".nav-item.has-dropdown");
 
 dropDownItems.forEach((item) => {

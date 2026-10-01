@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/news.css' %}">
+{% endblock %}
+
+{% block content %}
+<section class="page-section">
+    <div class="post-detail-header">
+        <h1 class="post-title">{{ post.text|truncatewords:10 }}</h1>
+        <p class="post-date">{{ post.created|date:"d.m.Y H:i" }}</p>
+    </div>
+
+    {% if post.photos %}
+        <div class="post-gallery">
+            {% for url in post.photos %}
+                <a href="{{ url }}" target="_blank" rel="noopener">
+                    <img src="{{ url }}" alt="">
+                </a>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <div class="text-block">
+        {{ post.text|linebreaks }}
+    </div>
+
+    <div class="post-tags">
+        {% for t in post.tags.all %}
+            <a href="{% url 'news:post_list_by_tag' t.slug %}">#{{ t.name }}</a>
+        {% endfor %}
+    </div>
+
+    <a href="{% url 'news:post_list' %}" class="post-back">← Все новости</a>
+</section>
+{% endblock %}

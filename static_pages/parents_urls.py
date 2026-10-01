@@ -1,0 +1,61 @@
+from django.urls import path
+from django.views.generic import TemplateView
+
+app_name='static_pages'
+
+urlpatterns = [
+    path(
+        'английский-жизнь-школы/', 
+        TemplateView.as_view(template_name='static_pages/parents/parents_english.html'),
+        name='english_school_live'
+    ),
+    path(
+        'библиотечно-информационный-центр/', 
+        TemplateView.as_view(template_name='static_pages/parents/parents_library.html'), 
+        name='parents_library'
+    ),
+    path(
+        'начальная-школа/',
+        TemplateView.as_view(template_name='static_pages/parents/parents_primary.html'),
+        name='parents_primary'
+    ),
+    path('обратная-связь/',
+        TemplateView.as_view(template_name='static_pages/parents/parents_feedback.html'),
+        name='parents_feedback'
+    ),
+    path(
+        'олимпиады-конкурсы-акции/',
+        TemplateView.as_view(template_name='static_pages/parents/parents_olympiad.html'),
+        name='parents_olympiad'
+    ),
+    path(
+        'полезные_ссылки/',
+        TemplateView.as_view(template_name='static_pages/parents/parents_links.html'),
+        name='parents_links'
+    ),
+    path(
+        'внеурочная-деятельность/',
+        TemplateView.as_view(template_name='static_pages/parents/parents_extracurricular.html'),
+        name='parents_extracurricular'
+    ),
+    path(
+        'гпд/',
+        TemplateView.as_view(template_name='static_pages/parents/parents_gpd.html'),
+        name='parents_gpd'
+    ),
+    path(
+        'ориксэ/',
+        TemplateView.as_view(template_name='static_pages/parents/parents_oriks.html'),
+        name='parents_oriks'
+    ),
+    path(
+        'помощь-родителям/',
+        TemplateView.as_view(template_name='static_pages/parents/parents_help.html'),
+        name='parents_help'
+    ),
+    path(
+        'английский/',
+        TemplateView.as_view(template_name='static_pages/parents/teachers_english.html'),
+        name='teachers_english'
+    ),
+]

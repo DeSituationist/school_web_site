@@ -14,31 +14,31 @@
 {% endblock %}
 
 {% block content %}
-<section class="red announcements">
+<section class="red announcements page-section">
 	<h1>Объявления</h1>
 	<div class="announcements-stack">
 		<a href="#" class="banner">
 			<img src="{% static 'images/banner.jpg' %}" alt="Баннер">
 		</a>
-		<div class="banner_desc">
+		<div class="banner_desc text-block">
 			<p>Добро пожаловать на официальный сайт школы N135.</p>
 		</div>
 		<a href="#" class="year">
 			<img src="{% static 'images/2026_year.jpg' %}" alt="">
 		</a>
-		<div class="year_desc">
+		<div class="year_desc text-block">
 			<p>Президент России объявил 2026 год: «Годом Единства Народов России».</p>
 		</div>
 	</div>
 </section>
 
-<section class="orange MAX compact">
+<section class="orange MAX compact page-section">
 	<h1>Группы в соцсетях</h1>
 	<div class="social-rows">
 		<a href="https://max.ru/id7802145405_gos" class="social_banner">
 			<img src="{% static 'images/MAX.svg' %}" alt="MAX">
 		</a>
-		<div class="social_desc">
+		<div class="social_desc text-block">
 			<p>Официальная группа в ВК «Почувствуй135» в национальном мессенджере
 				<a href="https://max.ru/id7802145405_gos">MAX</a>
 			</p>
@@ -46,7 +46,7 @@
 		<a href="https://vk.ru/schola135" class="social_banner">
 			<img src="{% static 'images/VK.svg' %}" alt="VK">
 		</a>
-		<div class="social_desc">
+		<div class="social_desc text-block">
 			<p>Официальная группа в ВК «Почувствуй135» в мессенджере
 				<a href="https://vk.ru/schola135">VK</a>
 			</p>
@@ -54,7 +54,7 @@
 	</div>
 </section>
 
-<section class="yellow">
+<section class="yellow page-section">
 	<h1>Госуслуги</h1>
 	<div class="gosuslugi_banner">
 		<div class="bf-18__content">
@@ -73,29 +73,29 @@
 	</div>
 </section>
 
-<section class="green first-graders">
+<section class="green first-graders page-section">
 	<h1>Родителям первоклассников</h1>
 	<div class="section-row">
 		<img src="{% static 'images/certificate.jpg' %}" alt="">
-		<div>
+		<div class="text-block">
 			<p>Уважаемые родители будущих первоклассников 2026! С 01 февраля 2026 года в нашей школе начинается запись на занятия по программе «Школьная страна».
 				На занятиях дети познакомятся с нашей школой, правилами и традициями нашей образовательной организации, а также в игровой форме изучат азы основных предметов.
 				Более подробная информация о порядке записи на занятия и о расписании размещена на странице ОДОД.</p>
 		</div>
 		<img src="{% static 'images/chat_bot.jpg' %}" alt="">
-		<div>
+		<div class="text-block">
 			<p>В целях повышения качества организации питания обучающихся Управление социального питания организует повторное проведение опроса среди родителей (законных представителей) несовершеннолетних обучающихся общеобразовательных организаций.
 				Анкетирование осуществляется дистанционно — в специализированном чат-боте в национальном мессенджере MAX с использованием идентификационного номера, привязанного к единой карте школьника.</p>
 		</div>
 	</div>
 </section>
 
-<section class="blue">
+<section class="blue page-section">
     <h1>Электронный дневник</h1>
 
     <div class="section-row">
         <img src="{% static 'images/ednevnik_petobr.jpg' %}" alt="">
-        <div class="digital_desc">
+        <div class="digital_desc text-block">
             <p>«Электронный дневник»: памятка для петербургских родителей.</p>
             <p>С 1 августа 2025 года вход в сервис «Электронный дневник» возможен только с использованием ЕСИА («Госуслуги»).</p>
             <p>Для родителей (законных представителей) обучающихся школ Санкт-Петербурга, а также для самих обучающихся информация об образовательном процессе будет доступна:</p>
@@ -124,17 +124,17 @@
 
     <div class="section-row">
         <img id="rustore-qr" src="{% static 'images/qr-code_rustore.svg' %}" alt="">
-        <div>
+        <div class="digital_desc text-block">
             <p>QR код Rustore</p>
         </div>
     </div>
 </section>
 
-<section class="indigo">
+<section class="indigo page-section">
 	<h1>Сферум</h1>
     <div class="section-row">
         <img src="{% static 'images/spherum.png'%}" alt="">
-        <div class="spherum_desc">
+        <div class="spherum_desc text-block">
             <p>Справки для школы теперь можно отправлять в Сферуме.
                 Больше не нужно лично относить справку или бояться, что ребёнок потеряет её по пути в школу.
                 Уведомление об отсутствии можно отправить прямо в Сферуме — с помощью сервиса «Справка в школу». Достаточно указать ФИО ребёнка, сроки и причины отсутствия и выбрать нужного педагога (или нескольких).
@@ -144,11 +144,11 @@
         </div>
     </div>
 </section>
-<section class="violet">
+<section class="violet page-section">
 	<h1>Граффити</h1>
 	<div class="section-row">
 		<img src="{% static 'images/graffiti.jpg'%}" alt="">
-		<div class="graffiti_desc">
+		<div class="graffiti_desc text-block">
 			<p>Граффити и незаконное нанесение надписей
 				Писать на стенах нехорошо, — это знает каждый ребенок. 
 				Нанесение на стены домов различного рода надписей, рисунков относится к проявлениям хулиганства и вандализма, 
@@ -159,11 +159,11 @@
 		</div>
 	</div>
 </section>
-<section class="red">
+<section class="red page-section">
 	<h1>Самокаты</h1>
 	<div class="section-row">
 		<img src="{% static 'images/skate.jpg'%}" alt="">
-		<div class="skate_desc">
+		<div class="skate_desc text-block">
 			<p>
 				Весна приходит в наш город, а с ней на тротуарах и дорогах появляются СИМ (средства индивидуальной мобильности):
 				- электросамокаты;

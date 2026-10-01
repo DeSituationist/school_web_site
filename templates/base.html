@@ -6,7 +6,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="{% static 'css/base.css' %}"> 
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@700&display=swap" rel="stylesheet"> 
     {% block extra_css %}{% endblock %}
     {% block extra_js%}{% endblock %}
 
@@ -17,45 +20,67 @@
 <body {% block body_attrs %}{% endblock %}>
     <header>
         <nav class="main-nav">
-            <ul class="nav-list">
-                <li class="nav-item has-dropdown">
-                    <button class="nav-link">Родителям</button>
-                    <div class="dropdown">
-                        <a href="английский-жизнь-школы.html">Английский</a>
-                        <a href="библиотечно-информационный-центр.html">Библиотека</a>
-                        <a href="начальная-школа.html">Начальная школа</a>
-                        <a href="обратная-связь.html">Обратная связь</a>
-                        <a href="олимпиады-конкурсы-акции.html">Олимпиады и конкурсы</a>
-                        <a href="полезные-ссылки.html">Полезные ссылки</a>
-                        <a href="внеурочная-деятельность.html">Внеурочная деятельность</a>
-                        <a href="гпд.html">ГПД</a>
-                        <a href="ориксэ.html">ОРИКСЭ</a>
-                        <a href="помощь-родителям.html">Помощь родителям</a>
-                    </div>
-                </li>
-                <li class="nav-item">
-                    <a href="новости.html" class="nav-link">Новости</a>
-                </li>
-                <li class="nav-item has-dropdown">
-                    <button class="nav-link">Учительская</button>
-                    <div class="dropdown">
-                        <a href="английский-язык.html">Английский язык</a>
-                        <a href="информатика.html">Информатика</a>
-                        <a href="история-и-обществознание.html">История и обществознание</a>
-                        <a href="математика.html">Математика</a>
-                        <a href="русский-язык-и-литература.html">Русский язык и литература</a>
-                        <a href="сайты-учителей.html">Сайты учителей</a>
-                        <a href="физическая-культура.html">Физическая культура</a>
-                    </div>
-                </li>
-            </ul>
-            <div class="search-container">
-                <form action="" method="get" class="search-form">
-                    <input type="text" name="query" placeholder="Поиск..." required>
-                    <button type="submit" aria-label="Искать">🔍</button>
-                </form>
-            </div>
-        </nav>
+        <a href="/core/" class="brand" aria-label="На главную">
+            <svg class="brand-logo" viewBox="0 0 130 60" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <defs>
+                    <mask id="brand-cut" mask-type="luminance">
+                        <rect x="0" y="0" width="130" height="60" fill="#ffffff"/>
+                        <text x="65" y="46"
+                            text-anchor="middle"
+                            font-family="'Quicksand', 'Roboto', sans-serif"
+                            font-size="48"
+                            font-weight="700"
+                            letter-spacing="-1"
+                            fill="#000000">135</text>
+                    </mask>
+                </defs>
+                <rect x="0" y="0" width="130" height="60"
+                    rx="14" ry="14"
+                    fill="currentColor"
+                    mask="url(#brand-cut)"/>
+            </svg>
+        </a>
+
+        <ul class="nav-list">
+            <li class="nav-item has-dropdown">
+                <button class="nav-link">Родителям</button>
+                <div class="dropdown">
+                    <a href="{% url 'parents:english_school_live' %}">Английский</a>
+                    <a href="{% url 'parents:parents_library' %}">Библиотека</a>
+                    <a href="{% url 'parents:parents_primary' %}">Начальная школа</a>
+                    <a href="{% url 'parents:parents_feedback' %}">Обратная связь</a>
+                    <a href="{% url 'parents:parents_olympiad' %}">Олимпиады и конкурсы</a>
+                    <a href="{% url 'parents:parents_links' %}">Полезные ссылки</a>
+                    <a href="{% url 'parents:parents_extracurricular' %}">Внеурочная деятельность</a>
+                    <a href="{% url 'parents:parents_gpd' %}">ГПД</a>
+                    <a href="{% url 'parents:parents_oriks' %}">ОРИКСЭ</a>
+                    <a href="{% url 'parents:parents_help' %}">Помощь родителям</a>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a href="{% url 'news:post_list' %}" class="nav-link">Новости</a>
+            </li>
+            <li class="nav-item has-dropdown">
+                <button class="nav-link">Учительская</button>
+                <div class="dropdown">
+                    <a href="{% url 'teachers:teachers_english' %}">Английский язык</a>
+                    <a href="{% url 'teachers:teachers_computer_science' %}">Информатика</a>
+                    <a href="{% url 'teachers:teachers_social_science' %}">История и обществознание</a>
+                    <a href="{% url 'teachers:teachers_math' %}">Математика</a>
+                    <a href="{% url 'teachers:teachers_russian' %}">Русский язык и литература</a>
+                    <a href="{% url 'teachers:teachers_personal' %}">Сайты учителей</a>
+                    <a href="{% url 'teachers:teachers_PE' %}">Физическая культура</a>
+                </div>
+            </li>
+        </ul>
+
+        <div class="search-container">
+            <form action="" method="get" class="search-form">
+                <input type="text" name="query" placeholder="Поиск..." required>
+                <button type="submit" aria-label="Искать">🔍</button>
+            </form>
+        </div>
+    </nav>
     </header>
     <main>
         {% block content %}

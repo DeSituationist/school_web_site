@@ -39,7 +39,10 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "taggit",
     "core",
+    "static_pages",
+    "news",
 ]
 
 MIDDLEWARE = [
@@ -113,6 +116,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # https://docs.djangoproject.com/en/6.1/topics/i18n/
 
 LANGUAGE_CODE = "en-us"
+TAGGIT_STRIP_UNICODE_WHEN_SLUGIFYING = True
 
 TIME_ZONE = "UTC"
 

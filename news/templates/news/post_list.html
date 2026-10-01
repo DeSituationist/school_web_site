@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/news.css' %}">
+{% endblock %}
+
+{% block content %}
+<section class="page-section">
+    <h1>Новости школы</h1>
+
+    <div class="tag-cloud">
+        {% if tag %}
+            <a href="{% url 'news:post_list' %}" class="tag-reset">← Сбросить</a>
+        {% endif %}
+        {% for t in all_tags %}
+            <a href="{% url 'news:post_list_by_tag' t.slug %}"
+               class="tag-badge {% if tag and tag.slug == t.slug %}active{% endif %}">
+                #{{ t.name }}
+            </a>
+        {% endfor %}
+    </div>
+
+    <div class="posts-grid">
+        {% for post in page_obj %}
+            <article class="post-card">
+                <a href="{{ post.get_absolute_url }}">
+                    {% if post.photos %}
+                        <img src="{{ post.photos.0 }}" alt="">
+                    {% else %}
+                        <img src="{% static 'images/default_banner.png' %}" alt="">
+                    {% endif %}
+                    <h2>{{ post.text|truncatewords:12 }}</h2>
+                </a>
+                <p class="post-date">{{ post.created|date:"d.m.Y H:i" }}</p>
+                <div class="post-tags">
+                    {% for t in post.tags.all %}
+                        <a href="{% url 'news:post_list_by_tag' t.slug %}">#{{ t.name }}</a>
+                    {% endfor %}
+                </div>
+            </article>
+        {% empty %}
+            <p>Постов пока нет.</p>
+        {% endfor %}
+    </div>
+
+    {% if page_obj.has_other_pages %}
+    <nav class="pagination" aria-label="Навигация по страницам">
+        {% if page_obj.has_previous %}
+            <a href="?page={{ page_obj.previous_page_number }}" class="page-link">← Назад</a>
+        {% else %}
+            <span class="page-link disabled">← Назад</span>
+        {% endif %}
+
+        <span class="page-info">
+            Страница {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}
+        </span>
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}" class="page-link">Вперёд →</a>
+        {% else %}
+            <span class="page-link disabled">Вперёд →</span>
+        {% endif %}
+    </nav>
+    {% endif %}
+</section>
+{% endblock %}
