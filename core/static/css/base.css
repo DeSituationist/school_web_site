@@ -1,457 +1,414 @@
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-:root{
-    --bg-color: #123F36;
-    --primary-bg-color: #2A6B5C;
-    --text-color: #E8DCC4;
-    --text-active: #123F36;
-    --hover-bg: #C49A45;
-    --border-color: #C49A45;
-    --border-radius: 1.4em;
-    --transition: 0.25s ease;
-}
-
-html{
-    font-size: 62.5%;
-}
-
-body{
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    background-color: var(--bg-color);
-    font-family: "Roboto", sans-serif;
-    color: var(--text-color);
-}
-
-header{
-    position: relative;
-    z-index: 200;
-}
-
-main{
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-}
-
-button, a{
-    color: inherit;
-    font-size: inherit;
-    font-family: inherit;
-    background: none;
-    border: none;
-    cursor: pointer;
-    text-decoration: none;
-    outline: none;
-}
-
 /* =========================================================
-   Navigation
+   Базовые стили. Работают поверх Bootstrap 5.3:
+   здесь только палитра, шрифты и то, чего в Bootstrap нет.
    ========================================================= */
-.main-nav {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 2rem;
-    padding: 0.6rem 2rem;
-    background-color: var(--primary-bg-color);
-    border-bottom: 0.1rem solid var(--border-color);
-    width: 100%;
-    justify-content: flex-start;  
+
+:root {
+    /* Палитра */
+    --bg-color: #ffffff;
+    --primary-bg-color: #f5f8fc;
+    --text-color: #1a2332;
+    --text-muted: #5a6a7a;
+    --text-active: #ffffff;
+    --primary-color: #0d4a8f;
+    --primary-dark: #083266;
+    --primary-light: #eaf1f9;
+    --hover-bg: #0d4a8f;
+    --border-color: #d6e0eb;
+    --border-radius: 0.5rem;
+    --transition: 0.2s ease;
+    --font-heading: "PT Serif", Georgia, "Times New Roman", serif;
+
+    /* Подстановка палитры в Bootstrap */
+    --bs-primary: #0d4a8f;
+    --bs-primary-rgb: 13, 74, 143;
+    --bs-link-color-rgb: 13, 74, 143;
+    --bs-link-hover-color-rgb: 8, 50, 102;
+    --bs-body-color: #1a2332;
+    --bs-secondary-color: #5a6a7a;
+    --bs-border-color: #d6e0eb;
+    --bs-body-line-height: 1.6;
+    --bs-body-font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 
+body { -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
 
-.nav-list {
-    display: flex;
-    gap: 0.5rem;
-    list-style: none;
-    padding: 0.8rem 0;
-    border: none;
-}
+h1, h2, h3, h4, h5, h6 { font-family: var(--font-heading); }
 
-.nav-item{
-    position: relative;
-}
+a { text-decoration: none; transition: color var(--transition); }
+img { max-width: 100%; height: auto; }
 
-.nav-link{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: 3.2rem;
-    padding: 0 1.8rem;
-    font-size: 1.6rem;
-    color: var(--text-color);
-    text-transform: uppercase;
-    transition: color var(--transition), background-color var(--transition);
-}
+:focus-visible { outline: 2px solid var(--primary-color); outline-offset: 2px; }
 
-.nav-link:hover,
-.nav-link:focus,
-.nav-item.open > .nav-link{
-    color: var(--text-active);
-    background-color: var(--hover-bg);
-}
+.container { max-width: 1320px; --bs-gutter-x: 3rem; }
 
-/* =========================================================
-   Search
-   ========================================================= */
-.search-form {
-    display: flex;
-    align-items: center;
-    background-color: var(--bg-color);
-    border: 0.1rem solid var(--border-color);
-    border-radius: 0.4rem;
-    overflow: hidden;
-    transition: box-shadow var(--transition);
-}
-
-.search-form:focus-within {
-    box-shadow: 0 0 0 0.2rem rgba(196, 154, 69, 0.5);
-}
-
-.search-form input {
-    appearance: none;
-    -webkit-appearance: none;
-    font-family: inherit;
-    font-size: 1.4rem;
-    background-color: transparent;
-    color: var(--text-color);
-    border: none;
-    padding: 0.8rem 1.2rem;
-    outline: none;
-    width: 20rem;
-}
-
-.search-form input:-webkit-autofill,
-.search-form input:-webkit-autofill:hover,
-.search-form input:-webkit-autofill:focus,
-.search-form input:-webkit-autofill:active {
-    -webkit-box-shadow: 0 0 0 30px var(--bg-color) inset !important;
-    -webkit-text-fill-color: var(--text-color) !important;
-    transition: background-color 5000s ease-in-out 0s;
-}
-
-.search-form input::placeholder {
-    color: var(--text-color);
-    opacity: 0.6;
-}
-
-.search-form button {
-    background-color: var(--hover-bg);
-    border: none;
-    color: var(--text-active);
-    padding: 0.8rem 1.4rem;
-    cursor: pointer;
-    font-size: 1.6rem;
-    transition: background-color var(--transition);
-}
-
-.search-form button:hover {
-    background-color: #b0893a;
-}
-
-.search-container {
-    margin-left: auto;
-}
-
-/* =========================================================
-   Dropdown
-   ========================================================= */
-.dropdown{
+.skip-link {
     position: absolute;
-    top: 100%;
-    left: 0;
-    min-width: 10rem;
-    margin-top: 0.8rem;
-    padding: 0.8rem;
-    background-color: var(--primary-bg-color);
-    border: 0.1rem solid var(--border-color);
-    box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.35);
+    left: -9999px;
+    top: 0;
+    z-index: 9999;
+    padding: 0.75rem 1.25rem;
+    background: var(--primary-color);
+    color: #ffffff;
+    border-radius: 0 0 var(--border-radius) 0;
+}
+.skip-link:focus { left: 0; color: #ffffff; }
 
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(-0.5rem);
-    transition: opacity var(--transition), transform var(--transition), visibility var(--transition);
-    z-index: 100;
+/* =========================================================
+   Кнопки Bootstrap в цветах сайта
+   ========================================================= */
+.btn-primary {
+    --bs-btn-bg: var(--primary-color);
+    --bs-btn-border-color: var(--primary-color);
+    --bs-btn-hover-bg: var(--primary-dark);
+    --bs-btn-hover-border-color: var(--primary-dark);
+    --bs-btn-active-bg: var(--primary-dark);
+    --bs-btn-active-border-color: var(--primary-dark);
+    --bs-btn-disabled-bg: var(--primary-color);
+    --bs-btn-disabled-border-color: var(--primary-color);
+    --bs-btn-focus-shadow-rgb: 13, 74, 143;
 }
 
-.nav-item.open .dropdown{
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-}
-
-.dropdown a{
-    display: flex;
-    align-items: center;
-    min-height: 3.5rem;
-    padding: 0.8rem 1.4rem;
-    font-size: 1.2rem;
-    color: var(--text-color);
-    transition: color var(--transition), background-color var(--transition);
-}
-
-.dropdown a:hover,
-.dropdown a:focus{
-    color: var(--text-active);
-    background-color: var(--hover-bg);
+.btn-outline-primary {
+    --bs-btn-color: var(--primary-color);
+    --bs-btn-border-color: var(--primary-color);
+    --bs-btn-hover-bg: var(--primary-color);
+    --bs-btn-hover-border-color: var(--primary-color);
+    --bs-btn-active-bg: var(--primary-dark);
+    --bs-btn-active-border-color: var(--primary-dark);
+    --bs-btn-disabled-color: var(--primary-color);
+    --bs-btn-disabled-border-color: var(--primary-color);
+    --bs-btn-focus-shadow-rgb: 13, 74, 143;
 }
 
 /* =========================================================
-   Footer
+   Шапка
    ========================================================= */
-footer {
-    width: 100%;
+.site-header {
+    border-bottom: 1px solid var(--border-color);
+    padding: 1.25rem 0;
 }
 
-.footer-nav {
+.site-header__inner {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 3rem;
-    padding: 1.8rem 3rem;
-    background-color: var(--primary-bg-color);
-    border-top: 0.15rem solid var(--border-color);
-    color: var(--text-color);
-    font-size: 2.1rem;
-    flex-wrap: wrap;
+    gap: 2rem;
 }
 
-.footer-item {
-    flex: 1 1 0;
-    min-width: 0;
-}
+.brand { display: flex; align-items: center; gap: 1rem; color: var(--text-color); }
+.brand:hover, .brand:focus { color: var(--primary-color); }
 
-.footer-left {
-    text-align: left;
-}
-
-.footer-center {
-    text-align: center;
-}
-
-.footer-right {
+.brand-mark {
+    width: 4rem;
+    height: 4rem;
+    flex-shrink: 0;
     display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    gap: 0.75rem;
-    text-align: right;
-}
-
-.github-link {
-    display: inline-flex;
     align-items: center;
     justify-content: center;
-    color: var(--text-color);
-    transition: color var(--transition);
+    background: var(--primary-color);
+    color: #ffffff;
+    border-radius: var(--border-radius);
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
 }
 
-.github-link:hover,
-.github-link:focus {
-    color: var(--hover-bg);
-}
+.brand-text { display: flex; flex-direction: column; line-height: 1.25; }
+.brand-title { font-family: var(--font-heading); font-size: 1.25rem; font-weight: 700; }
+.brand-subtitle { font-size: 0.8125rem; color: var(--text-muted); }
 
-.github-link svg {
-    width: 2.7rem;
-    height: 2.7rem;
-    fill: currentColor;
-    display: block;
+.header-info { align-items: center; gap: 2rem; }
+.header-info__item { display: flex; flex-direction: column; line-height: 1.3; }
+.header-info__label {
+    font-size: 0.6875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    font-weight: 600;
 }
+.header-info__value { font-size: 0.9375rem; font-weight: 600; color: var(--text-color); }
+.header-info__value:hover { color: var(--primary-color); }
 
 /* =========================================================
-   PAGE SECTION — светлая секция с боковыми border
+   Навигация
    ========================================================= */
-.page-section {
-    flex: 0 0 auto;
-    margin: 0 15rem;
-    padding: 4rem 2rem 6rem;
-    background: var(--primary-bg-color);
-    border-left: 0.1rem solid var(--border-color);
-    border-right: 0.1rem solid var(--border-color);
-    color: var(--text-color);
-
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
+.main-navbar {
+    --bs-navbar-toggler-icon-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255,255,255,0.9%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+    background-color: var(--primary-color);
+    padding: 0;
 }
 
-main > .page-section:last-child {
-    flex-grow: 1;
+.main-navbar .navbar-toggler {
+    margin: 0.5rem 0;
+    border-color: rgba(255, 255, 255, 0.5);
+}
+.main-navbar .navbar-toggler:focus { box-shadow: 0 0 0 0.2rem rgba(255, 255, 255, 0.35); }
+
+.main-navbar .nav-link {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 0.9375rem;
+    font-weight: 500;
+    padding: 1rem 1.25rem;
+    display: flex;
+    align-items: center;
+    transition: background-color var(--transition), color var(--transition);
+}
+
+.main-navbar .nav-link:hover,
+.main-navbar .nav-link:focus,
+.main-navbar .nav-link.show,
+.main-navbar .nav-link.active {
+    color: #ffffff;
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.main-navbar .dropdown-menu {
+    border: 1px solid var(--border-color);
+    border-radius: 0 0 var(--border-radius) var(--border-radius);
+    margin-top: 0;
+    min-width: 16rem;
+    padding: 0.5rem 0;
+}
+
+.main-navbar .dropdown-item {
+    font-size: 0.875rem;
+    padding: 0.55rem 1.25rem;
+    white-space: normal;
+}
+
+.main-navbar .dropdown-item:hover,
+.main-navbar .dropdown-item:focus {
+    background-color: var(--primary-light);
+    color: var(--primary-color);
+}
+
+/* Поиск */
+.search-form {
+    display: flex;
+    width: 100%;
+    max-width: 22rem;
+    margin: 0.75rem 0;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: var(--border-radius);
+}
+.search-form input {
+    flex: 1;
+    min-width: 0;
+    padding: 0.5rem 0.9rem;
+    background: transparent;
+    border: 0;
+    outline: 0;
+    color: #ffffff;
+    font: inherit;
+    font-size: 0.875rem;
+}
+.search-form input::placeholder { color: rgba(255, 255, 255, 0.7); }
+.search-form button {
+    padding: 0.5rem 1rem;
+    background: rgba(255, 255, 255, 0.15);
+    border: 0;
+    color: #ffffff;
+    transition: background-color var(--transition);
+}
+.search-form button:hover { background: rgba(255, 255, 255, 0.25); }
+
+/* =========================================================
+   Общие компоненты (используются на всех страницах)
+   ========================================================= */
+
+/* Полоса с заголовком страницы */
+.page-head {
+    background: var(--primary-bg-color);
+    border-bottom: 1px solid var(--border-color);
+}
+
+/* Заголовок секции */
+.section-title {
+    font-size: 1.625rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    padding-left: 0.9rem;
+    border-left: 4px solid var(--primary-color);
+}
+
+/* Секция с голубым фоном */
+.section-alt {
+    background: var(--primary-bg-color);
+    border-block: 1px solid var(--border-color);
+}
+
+/* Карточка: без обводки и тени, светлая заливка */
+.card {
+    --bs-card-border-width: 0;
+    --bs-card-border-radius: var(--border-radius);
+    --bs-card-bg: var(--primary-bg-color);
+    --bs-card-spacer-x: 1.5rem;
+    --bs-card-spacer-y: 1.5rem;
+}
+.section-alt .card { --bs-card-bg: #ffffff; }
+.card-body { line-height: 1.65; }
+
+/* Тег / ссылка-метка */
+.tag {
+    position: relative;
+    z-index: 2;
+    display: inline-block;
+    padding: 0.25rem 0.65rem;
+    font-size: 0.8125rem;
+    background: var(--primary-light);
+    color: var(--primary-color);
+    border-radius: var(--border-radius);
+    transition: background-color var(--transition), color var(--transition);
+}
+.tag:hover, .tag:focus, .tag.active { background: var(--primary-color); color: #ffffff; }
+
+/* =========================================================
+   Для старых страниц (родителям, учительская):
+   .page-section, .text-block, .section-row
+   ========================================================= */
+.page-section {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    width: 100%;
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 3rem 1.5rem 4rem;
 }
 
 .page-section h1 {
-    font-size: 3.6rem;
-    line-height: 1.2;
-    color: var(--text-color);
     margin: 0;
-}
-
-.page-section h2 {
-    font-size: 2.4rem;
+    padding-bottom: 1rem;
+    font-size: 2rem;
+    font-weight: 700;
     line-height: 1.25;
-    color: var(--text-color);
-    margin: 0;
+    border-bottom: 2px solid var(--primary-color);
 }
 
-/* =========================================================
-   TEXT BLOCK — тёмный блок с текстом и border
-   ========================================================= */
+.page-section h2 { margin: 0; font-size: 1.375rem; font-weight: 600; line-height: 1.3; }
+
 .text-block {
-    min-width: 0;
-    min-height: 0;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: stretch;
     gap: 0.75rem;
-    overflow-y: auto;
+    min-width: 0;
     padding: 1.5rem;
-    background: var(--bg-color);
-    border: 0.1rem solid var(--border-color);
-    color: var(--text-color);
-}
-
-.text-block > * { margin: 0; }
-
-.text-block p {
-    font-size: 1.75rem;
-    line-height: 1.5;
-}
-
-.text-block a {
-    color: var(--hover-bg);
-    font-weight: 700;
-    text-decoration: underline;
-    text-underline-offset: 0.25em;
-    transition: color var(--transition);
-}
-
-.text-block a:hover,
-.text-block a:focus {
-    color: var(--text-color);
-}
-
-.text-block ul,
-.text-block ol {
-    padding-left: 2.4rem;
-}
-
-.text-block li {
-    font-size: 1.75rem;
-    line-height: 1.5;
-    margin-bottom: 0.4rem;
-}
-
-.text-block li:last-child { margin-bottom: 0; }
-
-.text-block img {
-    max-width: 100%;
-    height: auto;
-    display: block;
+    overflow-y: auto;
+    background: var(--primary-bg-color);
     border-radius: var(--border-radius);
+    line-height: 1.65;
 }
+.text-block > *, .text-block p { margin: 0; }
+.text-block a { text-decoration: underline; text-underline-offset: 0.2em; }
+.text-block ul, .text-block ol { padding-left: 1.5rem; }
+.text-block li + li { margin-top: 0.4rem; }
+.text-block img { display: block; border-radius: var(--border-radius); }
 
-/* =========================================================
-   SECTION ROW / STACK — универсальные flex-контейнеры
-   Работают и на главной, и на внутренних страницах.
-   ========================================================= */
-.section-row,
-.announcements-stack,
-.social-rows {
+.section-row {
     display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
     gap: 1rem;
     width: 100%;
-    min-height: 0;
 }
-
-.section-row,
-.social-rows { flex-direction: row; }
-
-.announcements-stack { flex-direction: column; }
-
-/* Медиа-плитки: прямой <img> или <a> вокруг <img> */
 .section-row > img,
-.section-row > a,
-.announcements-stack > a,
-.social_banner {
+.section-row > a {
+    flex: 1.5 1 0;
     min-width: 0;
-    min-height: 0;
     display: block;
     overflow: hidden;
     border-radius: var(--border-radius);
-    box-shadow: 0 0 0 rgba(0, 0, 0, 0);
-    transition:
-        box-shadow var(--transition),
-        transform var(--transition);
 }
-
 .section-row > img,
-.section-row > a   { flex: 1.5 1 0; }
-.announcements-stack > a { flex: 10 1 0; }
-.social_banner     { flex: 1 1 0; overflow: visible; }
+.section-row > a img { width: 100%; height: 100%; object-fit: cover; }
+.section-row > .text-block { flex: 1 1 0; min-width: 220px; }
 
-.section-row > img,
-.section-row > a img,
-.announcements-stack > a img,
-.social_banner img {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform var(--transition);
+/* =========================================================
+   Подвал
+   ========================================================= */
+.site-footer {
+    padding: 2.5rem 0 0;
+    background: var(--primary-dark);
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 0.875rem;
 }
 
-.social_banner img { object-fit: contain; }
-
-.section-row > a:hover,
-.announcements-stack > a:hover {
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
-    transform: translateY(-2px);
+.site-footer__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr));
+    gap: 2rem;
+    padding-bottom: 2rem;
 }
 
-.section-row > a:hover img,
-.announcements-stack > a:hover img { transform: scale(1.05); }
+.site-footer__title { margin-bottom: 0.75rem; font-size: 1rem; font-weight: 700; color: #ffffff; }
+.site-footer p { margin: 0 0 0.5rem; }
 
-.social_banner:hover      { transform: translateY(-2px); }
-.social_banner:hover img  { transform: scale(1.05); }
+.site-footer a { color: rgba(255, 255, 255, 0.75); }
+.site-footer a:hover, .site-footer a:focus { color: #ffffff; }
 
-/* Текстовые блоки внутри flex-контейнеров */
-.section-row > .text-block,
-.announcements-stack > .text-block,
-.social_desc {
-    flex: 1 1 0;
-}
-
-.announcements-stack > .text-block {
-    text-align: center;
-    padding: 1rem 1.5rem;
-}
-
-.announcements-stack > .text-block p {
-    line-height: 1.4;
-}
-
-.brand {
-    display: inline-flex;
+.site-footer__bottom {
+    display: flex;
+    flex-wrap: wrap;
     align-items: center;
-    flex-shrink: 0;
-    color: var(--hover-bg);        
-    transition: color var(--transition), transform var(--transition);
+    justify-content: space-between;
+    gap: 0.5rem 1rem;
+    padding: 1.25rem 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    font-size: 0.8125rem;
+    color: rgba(255, 255, 255, 0.7);
 }
 
-.brand:hover,
-.brand:focus {
-    color: var(--text-color);      
-    transform: scale(1.05);
+.github-link { display: inline-flex; align-items: center; gap: 0.4rem; font-weight: 500; }
+.github-link svg { width: 1rem; height: 1rem; fill: currentColor; }
+
+/* =========================================================
+   Адаптив
+   ========================================================= */
+@media (min-width: 992px) {
+    /* Пункты тянутся на всю высоту строки меню (она выше из-за поиска),
+       поэтому выпадающий список открывается под всей строкой, а не под словом */
+    .main-navbar .navbar-collapse,
+    .main-navbar .navbar-nav { align-items: stretch; }
+    .main-navbar .nav-item { display: flex; }
+    .main-navbar .search-form { align-self: center; }
 }
 
-.brand-logo {
-    height: 4rem;
-    width: auto;
-    display: block;
+@media (max-width: 991.98px) {
+    .main-navbar .nav-link {
+        padding: 0.75rem 1rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .main-navbar .dropdown-menu {
+        padding: 0;
+        background: rgba(0, 0, 0, 0.12);
+        border: 0;
+        border-radius: 0;
+    }
+    .main-navbar .dropdown-item { padding-left: 2rem; color: rgba(255, 255, 255, 0.85); }
+    .main-navbar .dropdown-item:hover,
+    .main-navbar .dropdown-item:focus { background: rgba(255, 255, 255, 0.1); color: #ffffff; }
+    .search-form { max-width: 100%; margin: 0.75rem 0 1rem; }
+}
+
+@media (max-width: 767.98px) {
+    .container { --bs-gutter-x: 2rem; }
+    .site-header { padding: 0.875rem 0; }
+    .brand { gap: 0.75rem; }
+    .brand-mark { width: 3rem; height: 3rem; font-size: 1.25rem; }
+    .brand-title { font-size: 1.0625rem; }
+    .brand-subtitle { font-size: 0.75rem; }
+
+    .section-title { font-size: 1.375rem; }
+    .card { --bs-card-spacer-x: 1.25rem; --bs-card-spacer-y: 1.25rem; }
+
+    .page-section { padding: 2rem 1rem 3rem; }
+    .page-section h1 { font-size: 1.625rem; }
+    .page-section h2 { font-size: 1.25rem; }
+    .section-row { flex-direction: column; }
+    .section-row > img,
+    .section-row > a { flex: 1 1 auto; }
 }

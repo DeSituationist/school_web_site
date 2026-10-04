@@ -1,165 +1,95 @@
 /* =========================================================
-   Главная страница — только специфика главной.
-   Общие стили .page-section, .text-block, .section-row — в base.css
+   Главная страница — только то, чего нет в base.css и Bootstrap.
    ========================================================= */
 
-body.index-page {
-    --header-height: 80px;
-    --page-height: 100vh;
+/* Картинка в карточке показывается целиком, на всю ширину и высоту */
+.card-img-fill { background: var(--primary-light); }
+
+.card-img-fill img {
+  display: block;
+  width: 100%;
+  height: auto;
 }
 
-@supports (height: 100dvh) {
-    body.index-page { --page-height: 100dvh; }
-}
-
-body.index-page *,
-body.index-page *::before,
-body.index-page *::after {
-    box-sizing: border-box;
-}
-
-body.index-page header {
-    position: fixed;
-    top: 0; right: 0; left: 0;
-    height: var(--header-height);
-    z-index: 100;
-}
-
-/* Переопределяем .page-section для главной */
-body.index-page .page-section {
-    height: var(--page-height);
-    padding: var(--header-height) 2rem 2rem;
-    justify-content: flex-start;
-    align-items: center;
-    gap: 1rem;
-}
-
-body.index-page .page-section h1 {
-    font-size: 4em;
-    color: var(--text-color);
-}
-
-body.index-page .page-section.compact {
-    height: auto;
-    padding-bottom: 3rem;
-}
-
-/* На главной ряды растягиваются на всю высоту секции */
-body.index-page .section-row,
-body.index-page .announcements-stack,
-body.index-page .social-rows {
-    align-self: stretch;
-    flex: 1;
-}
-
-/* =========================================================
-   Section-specific tweaks
-   ========================================================= */
-
-/* --- MAX --- */
-.MAX_banner img { object-fit: contain; }
-.MAX_desc a     { color: var(--text-active); font-weight: 700; }
-
-/* --- Gosuslugi --- */
+/* --- Госуслуги --- */
 .gosuslugi_banner {
-    width: 100%;
-    align-self: stretch;
-    flex: 1;
-    min-height: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 
 .bf-18__content {
-    flex: 0 0 auto;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 2rem;
-    background: #50b3ff;
-    color: #0b1f33;
-    border-radius: var(--border-radius);
+  padding: 2rem;
+  background: var(--primary-color);
+  color: #ffffff;
+  border-radius: var(--border-radius);
 }
 
 .bf-18__text {
-    margin: 0 0 2rem 0;
-    font-size: 2rem;
-    font-weight: 700;
-    line-height: 1.4;
+  margin-bottom: 1.5rem;
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1.5;
 }
 
-.bf-18__bottom-wrap { display: flex; align-items: center; }
-.bf-18__btn-wrap    { max-width: 24rem; }
+.bf-18__btn-wrap { max-width: 24rem; }
 
 .pos-banner-btn_2 {
-    width: 100%;
-    min-height: 5.2rem;
-    background: #fff;
-    color: #0b1f33;
-    font-size: 1.6rem;
-    font-weight: 400;
-    padding: 0 1.5rem;
-    border: none;
-    border-radius: 0.4rem;
-    cursor: pointer;
+  width: 100%;
+  min-height: 3rem;
+  padding: 0 1.5rem;
+  background: #ffffff;
+  color: var(--primary-color);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  border: 0;
+  border-radius: var(--border-radius);
+  transition: background-color var(--transition);
 }
-
-.pos-banner-btn_2:hover { background: #f0f0f0; }
+.pos-banner-btn_2:hover { background: var(--primary-light); }
 
 .bf-18__decor {
-    flex: 1 1 0;
-    min-height: 15rem;
-    border-radius: var(--border-radius);
-    background:
-        #f8efec
-        url("https://pos.gosuslugi.ru/bin/banner-fluid/18/banner-fluid-bg-18-2.svg")
-        center / cover no-repeat;
+  flex: 1 1 0;
+  aspect-ratio: 16 / 9;
+  border-radius: var(--border-radius);
+  background: var(--primary-light)
+    url("https://pos.gosuslugi.ru/bin/banner-fluid/18/banner-fluid-bg-18-2.svg")
+    center / cover no-repeat;
 }
 
-/* --- First-graders --- */
-.first-graders .section-row img { flex: 2.5 1 0; }
+/* --- Соцсети --- */
+.social-logo {
+  display: block;
+  width: 120px;
+  height: 120px;
+  transition: transform var(--transition);
+}
+.social-logo:hover { transform: scale(1.15); }
+.social-logo img { width: 100%; height: 100%; object-fit: contain; }
 
-/* --- RuStore QR --- */
-.section-row #rustore-qr { object-fit: contain; }
-
-/* --- Digital diary text column --- */
-.blue .section-row .digital_desc {
-    flex: 2 1 0;
-    flex-direction: column;
-    justify-content: safe center;
-    align-items: stretch;
-    padding: 1.5rem 2rem;
-    font-size: 1.5rem;
-    line-height: 1.45;
+/* --- QR-код --- */
+.qr-code {
+  width: 100%;
+  max-width: 12rem;
+  aspect-ratio: 1 / 1;
+  padding: 0.75rem;
+  background: #ffffff;
+  border-radius: var(--border-radius);
 }
 
-.digital_desc p           { margin: 0 0 0.75rem; }
-.digital_desc p:last-of-type { margin-bottom: 0; }
-
-.digital_desc ul {
-    list-style: disc;
-    margin: 0.75rem 0 0;
-    padding-left: 1.5rem;
+/* --- Картинки в «Важно знать» --- */
+.notice-img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 14rem;
+  object-fit: cover;
 }
 
-.digital_desc li {
-    margin-bottom: 0.4rem;
-    padding-left: 0.25rem;
+@media (max-width: 767.98px) {
+  .bf-18__content { padding: 1.5rem; }
+  .bf-18__text { font-size: 1.1rem; }
+  .bf-18__btn-wrap { max-width: none; }
+  .notice-img { height: auto; min-height: 0; max-height: 18rem; }
+  .social-logo { width: 96px; height: 96px; }
 }
-
-.digital_desc li:last-child  { margin-bottom: 0; }
-.digital_desc li::marker     { color: #007aff; }
-
-.digital_desc a {
-    color: var(--text-active);
-    font-weight: 700;
-    text-decoration: none;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.35);
-    transition: border-color 0.15s ease;
-}
-
-.digital_desc a:hover { border-bottom-color: currentColor; }
-
-/* --- Spherum text column --- */
-.indigo .section-row .spherum_desc { flex: 2 1 0; }
