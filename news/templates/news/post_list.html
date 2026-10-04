@@ -1,67 +1,105 @@
 {% extends "base.html" %}
 {% load static %}
 
-{% block extra_css %}
-<link rel="stylesheet" href="{% static 'css/news.css' %}">
+{% block title %}Новости — Школа №135{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'js/tag-pager.js' %}" defer></script>
 {% endblock %}
 
 {% block content %}
-<section class="page-section">
-    <h1>Новости школы</h1>
-
-    <div class="tag-cloud">
-        {% if tag %}
-            <a href="{% url 'news:post_list' %}" class="tag-reset">← Сбросить</a>
-        {% endif %}
-        {% for t in all_tags %}
-            <a href="{% url 'news:post_list_by_tag' t.slug %}"
-               class="tag-badge {% if tag and tag.slug == t.slug %}active{% endif %}">
-                #{{ t.name }}
-            </a>
-        {% endfor %}
+<div class="page-head">
+    <div class="container py-4">
+        <h1 class="h2 mb-3">Новости школы</h1>
+        <form action="{% url 'news:post_search' %}" method="get" class="row g-2" role="search">
+            <div class="col">
+                <input type="search" name="query" class="form-control"
+                       placeholder="Например: олимпиада" aria-label="Поисковый запрос"
+                       minlength="2" maxlength="100" required>
+            </div>
+            <div class="col-auto">
+                <button type="submit" class="btn btn-primary">Найти</button>
+            </div>
+        </form>
     </div>
+</div>
 
-    <div class="posts-grid">
-        {% for post in page_obj %}
-            <article class="post-card">
-                <a href="{{ post.get_absolute_url }}">
-                    {% if post.photos %}
-                        <img src="{{ post.photos.0 }}" alt="">
-                    {% else %}
-                        <img src="{% static 'images/default_banner.png' %}" alt="">
-                    {% endif %}
-                    <h2>{{ post.text|truncatewords:12 }}</h2>
-                </a>
-                <p class="post-date">{{ post.created|date:"d.m.Y H:i" }}</p>
-                <div class="post-tags">
-                    {% for t in post.tags.all %}
-                        <a href="{% url 'news:post_list_by_tag' t.slug %}">#{{ t.name }}</a>
-                    {% endfor %}
+<section class="py-5">
+    <div class="container">
+
+        <div class="mb-4" data-tag-pager data-per-page="10">
+            {% if tag %}
+                <div class="mb-2">
+                    <a href="{% url 'news:post_list' %}" class="tag">← Сбросить</a>
                 </div>
-            </article>
-        {% empty %}
-            <p>Постов пока нет.</p>
-        {% endfor %}
+            {% endif %}
+
+            <div class="d-flex flex-wrap align-items-center gap-2" data-tag-list>
+                {% for t in all_tags %}
+                    <a href="{% url 'news:post_list_by_tag' t.slug %}"
+                       class="tag {% if tag and tag.slug == t.slug %}active{% endif %}">#{{ t.name }}</a>
+                {% endfor %}
+            </div>
+
+            <div class="align-items-center gap-2 mt-3 d-none" data-tag-controls>
+                <button type="button" class="btn btn-sm btn-outline-primary" data-tag-prev aria-label="Предыдущие теги">←</button>
+                <span class="small text-muted" data-tag-info aria-live="polite"></span>
+                <button type="button" class="btn btn-sm btn-outline-primary" data-tag-next aria-label="Следующие теги">→</button>
+            </div>
+        </div>
+
+        {% if page_obj %}
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+            {% for post in page_obj %}
+            <div class="col">
+                <article class="card h-100 overflow-hidden">
+                    <div class="ratio ratio-16x9">
+                        {% if post.photos %}
+                            <img src="{{ post.photos.0 }}" alt="" class="object-fit-cover">
+                        {% else %}
+                            <img src="{% static 'images/default_banner.png' %}" alt="" class="object-fit-cover">
+                        {% endif %}
+                    </div>
+                    <div class="card-body d-flex flex-column gap-2">
+                        <h2 class="h6 mb-0">
+                            <a href="{{ post.get_absolute_url }}" class="stretched-link text-body">{{ post.text|truncatewords:12 }}</a>
+                        </h2>
+                        <p class="small text-muted mb-0">{{ post.created|date:"d.m.Y H:i" }}</p>
+                        <div class="d-flex flex-wrap gap-2 mt-auto pt-2">
+                            {% for t in post.tags.all %}
+                                <a href="{% url 'news:post_list_by_tag' t.slug %}" class="tag">#{{ t.name }}</a>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </article>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+            <p class="text-muted">Постов пока нет.</p>
+        {% endif %}
+
+        {% if page_obj.has_other_pages %}
+        <nav class="d-flex justify-content-between align-items-center gap-3 mt-5 pt-4 border-top"
+             aria-label="Навигация по страницам">
+            {% if page_obj.has_previous %}
+                <a href="?page={{ page_obj.previous_page_number }}" class="btn btn-outline-primary">← Назад</a>
+            {% else %}
+                <span class="btn btn-outline-primary disabled" aria-disabled="true">← Назад</span>
+            {% endif %}
+
+            <span class="small text-muted text-center">
+                Страница {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}
+            </span>
+
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}" class="btn btn-outline-primary">Вперёд →</a>
+            {% else %}
+                <span class="btn btn-outline-primary disabled" aria-disabled="true">Вперёд →</span>
+            {% endif %}
+        </nav>
+        {% endif %}
+
     </div>
-
-    {% if page_obj.has_other_pages %}
-    <nav class="pagination" aria-label="Навигация по страницам">
-        {% if page_obj.has_previous %}
-            <a href="?page={{ page_obj.previous_page_number }}" class="page-link">← Назад</a>
-        {% else %}
-            <span class="page-link disabled">← Назад</span>
-        {% endif %}
-
-        <span class="page-info">
-            Страница {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}
-        </span>
-
-        {% if page_obj.has_next %}
-            <a href="?page={{ page_obj.next_page_number }}" class="page-link">Вперёд →</a>
-        {% else %}
-            <span class="page-link disabled">Вперёд →</span>
-        {% endif %}
-    </nav>
-    {% endif %}
 </section>
 {% endblock %}
